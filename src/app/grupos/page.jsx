@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import Link from "next/link";
+
 const prisma = new PrismaClient();
 
 async function PaginaGrupos() {

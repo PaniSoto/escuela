@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import Link from "next/link";
+
 const prisma = new PrismaClient();
 
 async function PaginaEstudiantes() {
@@ -9,7 +10,7 @@ async function PaginaEstudiantes() {
         <div>
             <h1>Lista de estudiantes</h1>
             <Suspense fallback={"Cargando..."}>
-                <Lista />
+                <Lista_Estudiantes />
             </Suspense>
         </div>
     );
@@ -19,16 +20,15 @@ export default PaginaEstudiantes;
 
 //------------------------------------------------ componente servidor
 
+async function Lista_Estudiantes() {
 
-async function Lista() {
-
-    const estudiantes = await prisma.estudiante.findMany()
-    //console.log(grupos)
+    const estudiantes = await prisma.alumno.findMany()
+    // console.log(estudiante)
 
     return (
         <div className="container mx-auto p-4 flex justify-center items-center">
             <div className="w-full md:w-1/2">
-                <h1 className="text-3xl font-bold my-4 text-center">Grupos</h1>
+                <h1 className="text-3xl font-bold my-4 text-center">Estudiantes</h1>
                 <ul className=" pl-8">
                     {estudiantes.map((estudiante) => (
                         <li key={estudiante.id} className="my-2 text-center">
@@ -36,13 +36,14 @@ async function Lista() {
                                 <span className="font-bold">Nombre: </span>{estudiante.nombre}
                             </div>
                             <div>
-                                <span className="font-bold">Tutor: </span>{estudiante.fecha_nacimiento}
+                            <span className="font-bold">Fecha de nacimiento: </span>
+                            {estudiante.fecha_nacimiento.toLocaleDateString()}
                             </div>
                             <div>
-                                <span className="font-bold">Aula: </span>{estudiante.foto}
+                                <img src={estudiante.foto}/>
                             </div>
                             <div>
-                                <span className="font-bold">Aula: </span>{estudiante.tutor_legal}
+                                <span className="font-bold">Tutor legal: </span>{estudiante.tutor_legal}
                             </div>
                         </li>
 
