@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import Link from "next/link";
 import { Suspense } from "react";
 
 const prisma = new PrismaClient();
@@ -34,6 +35,8 @@ async function Lista({ id }) {
                 <p className="font-bold">Tutor: {grupo.tutor}</p>
                 <p className="font-bold">Aula: {grupo.aula}</p>
             </div>
+            <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" href="/grupos">Volver al inicio</Link>
+
         </div>
     );
 }
