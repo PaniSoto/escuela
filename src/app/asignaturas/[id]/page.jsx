@@ -1,3 +1,4 @@
+import { obtenerAsignatura } from "@/lib/data";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -22,11 +23,7 @@ export default PaginaAsignatura;
 //----------------- Componente de servidor
 
 async function Lista({ id }) {
-    const asignatura = await prisma.asignatura.findUnique({
-        where: {
-            id: +Number(id)
-        }
-    })
+    const asignatura = await obtenerAsignatura(id)
 
     return (
         <div className="container mx-auto p-4 flex justify-center items-center bg-gray-100 rounded-xl shadow-lg">

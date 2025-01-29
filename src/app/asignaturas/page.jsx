@@ -1,10 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import Link from "next/link";
 import { insertarAsignatura, modificarAsignatura, eliminarAsignatura } from "@/lib/actions";
 import Modal from "@/components/modal";
+import { obtenerAsignaturas } from "@/lib/data";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 async function PaginaAsignaturas() {
 
@@ -14,12 +15,7 @@ async function PaginaAsignaturas() {
             <Modal texto="Insertar asignatura">
                 <p className="text-center font-semibold mb-4">Añadir una nueva asignatura</p>
 
-                <form action={insertarAsignatura} className="space-y-4">
-                    <input name="nombre" placeholder="Nombre" className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500" />
-                    <input name="profesor" placeholder="profesor" className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500" />
-                    <input type="text" name="num_horas" placeholder="num_horas" className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500" />
-                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-md">Insertar asignatura</button>
-                </form>
+                
             </Modal>
             <Suspense fallback={"Cargando..."}>
                 <Lista_Asignaturas />
@@ -34,7 +30,7 @@ export default PaginaAsignaturas;
 
 async function Lista_Asignaturas() {
 
-    const asignaturas = await prisma.asignatura.findMany()
+    const asignaturas = await obtenerAsignaturas();
     // console.log(estudiante)
 
     return (

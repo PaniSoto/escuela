@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  // provider = "mysql"
+  // provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -15,6 +15,7 @@ model Grupo {
   aula   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  estudiantes Alumno[]
 
   @@map("grupos")
 }
@@ -25,6 +26,9 @@ model Alumno {
   fecha_nacimiento DateTime
   foto             String?
   tutor_legal      String   @default("Ambos padres")
+  grupoId          Int
+  grupo            Grupo    @relation(fields: [grupoId], references: [id])
+  asignaturas      Asignatura[]
 
   @@map("estudiantes")
 }
@@ -34,6 +38,7 @@ model Asignatura {
   nombre String
   profesor String
   num_horas Int
+  estudiantes Alumno[]
 
   @@map("asignaturas")
 }

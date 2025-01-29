@@ -1,11 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import Link from "next/link";
 import Modal from "@/components/modal";
 
 import { insertarEstudiante, modificarEstudiante, eliminarEstudiante } from "@/lib/actions";
+import { obtenerEstudiantes } from "@/lib/data";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 async function PaginaEstudiantes() {
 
@@ -25,7 +26,7 @@ async function PaginaEstudiantes() {
                 </form>
             </Modal>
             <Suspense fallback={"Cargando..."}>
-                <Lista_Estudiantes />
+                <PaginaEstudiante />
             </Suspense>
         </div>
     );
@@ -35,9 +36,9 @@ export default PaginaEstudiantes;
 
 //------------------------------------------------ componente servidor
 
-async function Lista_Estudiantes() {
+async function PaginaEstudiante() {
 
-    const estudiantes = await prisma.alumno.findMany()
+    const estudiantes = await obtenerEstudiantes()
     // console.log(estudiante)
 
     return (

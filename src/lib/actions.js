@@ -1,9 +1,9 @@
 'use server'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 
-const prisma = new PrismaClient()
 
+//---------------------------------- Grupo ---------------------------------------
 export async function insertarGrupo(formData) {
     const nombre = formData.get('nombre')
     const tutor = formData.get('tutor')
@@ -102,6 +102,7 @@ export async function eliminarEstudiante(formData) {
     revalidatePath('/estudiantes')
   }
 
+//---------------------------------- Asignatura ---------------------------------------
   export async function insertarAsignatura(formData) {
     const nombre = formData.get('nombre')
     const profesor = formData.get('profesor')
