@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Modal from "@/components/modal";
-import { insertarGrupo, eliminarGrupo, modificarGrupo } from "@/lib/actions";
 import { obtenerGrupos } from "@/lib/data";
 import GrupoInsertar from "./Insertar";
 import GrupoModificar from "./Modificar";

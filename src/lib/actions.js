@@ -57,13 +57,15 @@ export async function insertarEstudiante(formData) {
     const fecha = new Date(formData.get('fecha_nacimiento'))
     const foto = formData.get('foto')
     const tutor = formData.get('tutor_legal')
+    const grupoId = Number(formData.get('grupoId'))
 
     await prisma.alumno.create({
         data: {
             nombre: nombre,
             fecha_nacimiento: fecha,
             foto: foto,
-            tutor_legal: tutor
+            tutor_legal: tutor,
+            grupoId: grupoId
         }
     })
 
@@ -76,7 +78,8 @@ export async function modificarEstudiante(formData) {
     const fecha = new Date(formData.get('fecha_nacimiento'))
     const foto = formData.get('foto')
     const tutor = formData.get('tutor_legal')
-
+    const grupoId = Number(formData.get('grupoId'))
+    
     await prisma.alumno.update({
         where: {
             id
@@ -85,7 +88,8 @@ export async function modificarEstudiante(formData) {
             nombre: nombre,
             tutor_legal: tutor,
             fecha_nacimiento: fecha,
-            foto: foto
+            foto: foto,
+            grupoId: grupoId
         }
     })
 
