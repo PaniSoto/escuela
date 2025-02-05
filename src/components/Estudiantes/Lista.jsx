@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Modal from "@/components/modal";
-import { obtenerEstudiantes } from "@/lib/data";
+import { obtenerEstudiantes, obtenerGrupos } from "@/lib/data";
 import EstudianteInsertar from "./Insertar";
 import EstudianteModificar from "./Modificar";
 import EstudianteEliminar from "./Eliminar";
@@ -8,12 +8,13 @@ import EstudianteEliminar from "./Eliminar";
 export async function PaginaEstudiante() {
 
     const estudiantes = await obtenerEstudiantes()
+    const grupos = await obtenerGrupos()
     // console.log(estudiante)
 
     return (
         <div className="container mx-auto p-4 flex justify-center items-center">
-             <Modal texto="Insertar grupo">
-                <EstudianteInsertar />
+             <Modal texto="Insertar estudiante">
+                <EstudianteInsertar grupos={grupos}/>
             </Modal>
             <div className="w-full md:w-1/2">
                 <h1 className="text-3xl font-bold my-4 text-center">Estudiantes</h1>
@@ -37,7 +38,7 @@ export async function PaginaEstudiante() {
                                 <EstudianteEliminar estudiante={estudiante} />
                             </Modal>
                             <Modal texto={"Modificar estudiante"}>
-                               <EstudianteModificar estudiante={estudiante} />
+                               <EstudianteModificar estudiante={estudiante} grupos={grupos} />
                             </Modal>
                         </li>
 

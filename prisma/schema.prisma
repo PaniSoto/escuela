@@ -26,8 +26,8 @@ model Alumno {
   fecha_nacimiento DateTime
   foto             String?
   tutor_legal      String   @default("Ambos padres")
-  grupoId          Int
-  grupo            Grupo    @relation(fields: [grupoId], references: [id])
+  grupoId          Int?
+  grupo            Grupo?    @relation(fields: [grupoId], references: [id])
   asignaturas      Asignatura[]
 
   @@map("estudiantes")
